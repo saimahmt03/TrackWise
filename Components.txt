@@ -1,0 +1,164 @@
+-----------------------------------------------------------------------------------------------------------
+COMPONENTS
+-----------------------------------------------------------------------------------------------------------
+Add Button
+	- new employee, new department, new task	
+Update Button
+	- update employee, update department, update task
+Form
+	- new employee, new department, new task          
+	- update employee, update department, update task	
+Table
+	- display list of employee (employee info, department name)
+	- display list of department (department infor)
+	- display list of task (task name, employee name, priority level, status level)
+	- display list of assign task (task, employee)
+Dropdown Button
+	- selection of priority level for activity
+	- selection of status level for activity
+----------------------------------------------------------------------------------------------------------
+PROJECT FOLDER STRUCTURE
+----------------------------------------------------------------------------------------------------------
+src/
+│
+├── components/   ----> reusable UI components (buttons, forms, tables, etc.)
+│
+├── pages/        ----> application screens (Employees, Tasks, Dashboard, etc.)
+│
+├── services/     ----> API communication (calls to .NET backend)
+│
+├── hooks/        ----> reusable logic (custom React hooks)
+│
+├── utils/        ----> helper functions (e.g., API config, formatters)
+│
+├── context/      ----> global state management (optional)
+│
+├── App.js        ----> routing and main app structure
+│
+└── index.js      ----> entry point (starts the React app)
+----------------------------------------------------------------------------------------------------------
+COMPONENTS IN PROJECT STRUCTURE
+----------------------------------------------------------------------------------------------------------
+components/
+│
+├── Shared/
+│   ├── Button.jsx
+│   ├── Table.jsx
+│   ├── Modal.jsx
+│   ├── FormInput.jsx
+│   └── SelectDropdown.jsx
+│
+├── Employee/
+│   ├── EmployeeForm.jsx
+│   ├── EmployeeTable.jsx
+│
+├── Task/
+│   ├── TaskForm.jsx
+│   ├── TaskTable.jsx
+│
+├── Department/
+│   ├── DepartmentForm.jsx
+│   ├── DepartmentTable.jsx
+│
+└── Assignment/
+    ├── AssignmentForm.jsx
+    ├── AssignmentTable.jsx
+----------------------------------------------------------------------------------------------------------
+ARCHITECTURE
+----------------------------------------------------------------------------------------------------------
+Backend (.NET)
+- uses Layered Architecture
+Controller → Service → Repository → Database
+
+Frontend (React)
+- uses Component-Based Architecture
+Page → Components → UI Elements
+
+	BACKEND			FRONTEND
+-------------------------------------------------------
+| Layered Architecture | Component-Based Architecture |
+-------------------------------------------------------
+| Strict layers	       | Flexible structure           |
+-------------------------------------------------------
+|Business rules in services| Logic in hooks/services  |
+-------------------------------------------------------
+
+| Concept        | Backend                | Frontend            |
+| -------------- | ---------------------- | ------------------- |
+| Architecture   | Layered                | Component-based     |
+| Structure      | Layers                 | Components          |
+| Principle used | SOLID                  | SRP (part of SOLID) |
+| Goal           | Separation of concerns | Reusable UI pieces  |
+
+--------------------------------------------------------------------------------------------------------
+SYSTEM FLOW
+--------------------------------------------------------------------------------------------------------
+
+TRACKWISE SYSTEM FLOW (FULL ARCHITECTURE)
+
+React UI (Frontend)
+        ↓
+API Service Layer (Axios / Services)
+        ↓
+ASP.NET Core Web API (Backend)
+        ↓
+Controller
+        ↓
+Service (Business Logic)
+        ↓
+Repository (Data Access)
+        ↓
+Database (SQL Server)
+
+
+
+FRONTEND FLOW (Component-Based Architecture - React SPA)
+
+Page
+  ↓
+Components
+  ↓
+Hooks (optional logic)
+  ↓
+Services (API calls)
+
+
+BACKEND FLOW (Layered Architecture - SOLID)
+
+Controller
+   ↓
+Service (Business Logic)
+   ↓
+Repository (Data Access / ADO.NET)
+   ↓
+Data Layer (CreateConnection)
+   ↓
+Database (SQL Server)
+
+
+EXAMPLE: “Create Employee”
+
+Controller receives request
+   ↓
+Calls EmployeeService.CreateEmployee()
+   ↓
+Service validates business rules
+   ↓
+Calls EmployeeRepository.InsertEmployee()
+   ↓
+Repository uses CreateConnection()
+   ↓
+Executes SQL INSERT
+   ↓
+Data saved in SQL Server
+   ↓
+Result returned back to Controller
+   ↓
+Controller returns API response to React
+
+
+
+
+
+
+

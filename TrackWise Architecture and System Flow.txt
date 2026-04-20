@@ -1,0 +1,252 @@
+---------------------------------------------------------------------------
+COMPONENTS (FRONTEND UI DESIGN)
+---------------------------------------------------------------------------
+
+Button
+    - add employee, add department, add task
+    - update employee, update department, update task
+    - delete employee, delete department, delete task
+
+Form (Reusable per feature)
+    - employee form (create + update)
+    - department form (create + update)
+    - task form (create + update)
+
+    * uses FormInput and SelectDropdown from Shared
+
+Table
+    - display list of employees (employee info, department name)
+    - display list of departments (department info)
+    - display list of tasks (task name, employee name, priority level, status level)
+    - display list of assigned tasks (task, employee)
+
+Dropdown (Select Component)
+    - priority level selection (Low, Medium, High)
+    - status level selection (Not Started, In Progress, Completed)
+
+Modal
+    - used for create forms (employee, task, department)
+    - used for update forms
+    - used for delete confirmation dialogs
+
+---------------------------------------------------------------------------
+PROJECT FOLDER STRUCTURE (FRONTEND - REACT)
+---------------------------------------------------------------------------
+src/
+│
+├── components/   ----> reusable UI components (buttons, forms, tables, modal, inputs)
+│
+├── pages/        ----> application screens (Employees, Tasks, Departments, Dashboard)
+│
+├── services/     ----> API communication layer (calls to .NET Web API)
+│
+├── hooks/        ----> reusable logic (data fetching, state management logic)
+│
+├── utils/        ----> helper functions (API client, formatters, constants)
+│
+├── context/      ----> global state management (auth, shared app state)
+│
+├── App.js        ----> routing and main application layout
+│
+└── index.js      ----> entry point (application bootstrap)
+
+---------------------------------------------------------------------------
+COMPONENTS STRUCTURE (FRONTEND)
+---------------------------------------------------------------------------
+
+components/
+│
+├── Shared/
+│   ├── Button.jsx
+│   ├── Table.jsx
+│   ├── Modal.jsx
+│   ├── FormInput.jsx
+│   └── SelectDropdown.jsx
+│
+├── Employee/
+│   ├── EmployeeForm.jsx
+│   ├── EmployeeTable.jsx
+│
+├── Task/
+│   ├── TaskForm.jsx
+│   ├── TaskTable.jsx
+│
+├── Department/
+│   ├── DepartmentForm.jsx
+│   ├── DepartmentTable.jsx
+│
+└── Assignment/
+    ├── AssignmentForm.jsx
+    ├── AssignmentTable.jsx
+
+---------------------------------------------------------------------------
+ARCHITECTURE OVERVIEW
+---------------------------------------------------------------------------
+
+Backend (.NET)
+- Layered Architecture
+
+Controller → Service → Repository → Database
+
+Frontend (React)
+- Component-Based Architecture
+
+Page → Components → Services → UI Elements
+
+---------------------------------------------------------------------------
+COMPARISON TABLE
+---------------------------------------------------------------------------
+
+| Concept        | Backend (.NET)                | Frontend (React)           |
+| -------------- | ----------------------------- | -------------------------- |
+| Architecture   | Layered                       | Component-Based            |
+| Structure      | Controller → Service → Repo   | Page → Components          |
+| Principle used | SOLID                         | SRP (applied in components)|
+| Goal           | Business + data processing    | UI composition             |
+
+---------------------------------------------------------------------------
+SYSTEM FLOW (FULL ARCHITECTURE)
+---------------------------------------------------------------------------
+
+React UI (Frontend)
+        ↓
+Services Layer (Axios / API calls)
+        ↓
+ASP.NET Core Web API
+        ↓
+Controller
+        ↓
+DTO Layer (Request/Response Models)
+        ↓
+Service (Business Logic)
+        ↓
+Repository (Data Access / ADO.NET)
+        ↓
+Database (SQL Server)
+
+---------------------------------------------------------------------------
+FRONTEND FLOW (COMPONENT-BASED)
+---------------------------------------------------------------------------
+
+Page
+  ↓
+Components
+  ↓
+Hooks (optional logic layer)
+  ↓
+Services (API calls)
+
+---------------------------------------------------------------------------
+BACKEND FLOW (LAYERED ARCHITECTURE)
+---------------------------------------------------------------------------
+
+Controller
+   ↓
+DTO (Request/Response)
+   ↓
+Service (Business Logic)
+   ↓
+Repository (Data Access / SQL)
+   ↓
+Data Layer (CreateConnection)
+   ↓
+Database (SQL Server)
+
+---------------------------------------------------------------------------
+BACKEND PROJECT STRUCTURE (.NET WEB API)
+---------------------------------------------------------------------------
+
+TrackWise.API/
+│
+├── Controllers/     ----> API endpoints (HTTP requests handler)
+│   ├── EmployeeController.cs
+│   ├── TaskController.cs
+│   ├── DepartmentController.cs
+│   └── AssignmentController.cs
+│
+├── Services/        ----> business logic layer
+│   ├── EmployeeService.cs
+│   ├── TaskService.cs
+│   ├── DepartmentService.cs
+│   └── AssignmentService.cs
+│
+├── Interfaces/      ----> contracts for services/repositories
+│   ├── IEmployeeService.cs
+│   ├── ITaskService.cs
+│   ├── IEmployeeRepository.cs
+│
+├── Repositories/    ----> database operations (ADO.NET / SQL)
+│   ├── EmployeeRepository.cs
+│   ├── TaskRepository.cs
+│   ├── DepartmentRepository.cs
+│
+├── Models/          ----> database entities
+│   ├── Employee.cs
+│   ├── Task.cs
+│   ├── Department.cs
+│
+├── DTOs/            ----> API data contracts
+│
+│   ├── Requests/
+│   │   ├── Employee/
+│   │   │   ├── CreateEmployeeRequest.cs
+│   │   │   ├── UpdateEmployeeRequest.cs
+│   │   │
+│   │   ├── Task/
+│   │   ├── Department/
+│   │   └── Assignment/
+│
+│   ├── Responses/
+│   │   ├── Employee/
+│   │   │   ├── EmployeeResponse.cs
+│   │   │
+│   │   ├── Task/
+│   │   ├── Department/
+│   │   └── Assignment/
+│
+│   └── Common/
+│       ├── ApiResponse.cs
+│
+├── Data/            ----> DB connection setup
+│   └── DbConnectionFactory.cs
+│
+├── Helpers/         ----> utility classes
+│   ├── MapperHelper.cs
+│   ├── ResponseHelper.cs
+│
+├── Middleware/      ----> error handling, logging
+│   └── ExceptionMiddleware.cs
+│
+└── Program.cs       ----> app startup
+---------------------------------------------------------------------------
+EXAMPLE FLOW: CREATE EMPLOYEE
+---------------------------------------------------------------------------
+
+User clicks Add Employee (React)
+        ↓
+Modal opens (EmployeeForm)
+        ↓
+Form submits data
+        ↓
+employeeService.createEmployee()
+        ↓
+POST /api/employee
+        ↓
+EmployeeController receives request
+        ↓
+CreateEmployeeRequest (DTO)
+        ↓
+EmployeeService validates business rules
+        ↓
+EmployeeRepository executes SQL INSERT
+        ↓
+DbConnectionFactory opens connection
+        ↓
+SQL Server stores data
+        ↓
+Response returned (EmployeeResponse)
+        ↓
+UI updates Employee Table
+
+
+

@@ -1,0 +1,40 @@
+CREATE DATABASE TrackWise;
+
+CREATE TABLE Employees (
+    EmployeeId INT PRIMARY KEY IDENTITY(1,1),
+    FirstName NVARCHAR(100),
+    LastName NVARCHAR(100),
+    Email NVARCHAR(150),
+    DepartmentId INT,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Departments (
+    DepartmentId INT PRIMARY KEY IDENTITY(1,1),
+    DepartmentName NVARCHAR(100)
+);
+
+CREATE TABLE Tasks (
+    TaskId INT PRIMARY KEY IDENTITY(1,1),
+    Title NVARCHAR(200),
+    Description NVARCHAR(MAX),
+    Priority NVARCHAR(50), -- Low, Medium, High
+    Status NVARCHAR(50),   -- Not Started, In Progress, Completed
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE TaskAssignments (
+    AssignmentId INT PRIMARY KEY IDENTITY(1,1),
+    TaskId INT,
+    EmployeeId INT,
+    AssignedAt DATETIME DEFAULT GETDATE(),
+
+    FOREIGN KEY (TaskId) REFERENCES Tasks(TaskId),
+    FOREIGN KEY (EmployeeId) REFERENCES Employees(EmployeeId)
+);
+
+🔗 Relationships Overview
+Employee → Department (Many-to-One)
+Task → Employee (Many-to-Many via TaskAssignments)
+Employee → ActivityLogs (One-to-Many)
+

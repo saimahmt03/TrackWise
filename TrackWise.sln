@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TrackWise.API", "TrackWise.API", "{AD2F308C-3B0C-982B-BE49-0AFBC3CA57AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackWise.API", "TrackWise.API\TrackWise.API\TrackWise.API.csproj", "{FB966B67-2B56-5F2C-60D9-82DD94D1FCAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB966B67-2B56-5F2C-60D9-82DD94D1FCAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB966B67-2B56-5F2C-60D9-82DD94D1FCAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB966B67-2B56-5F2C-60D9-82DD94D1FCAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB966B67-2B56-5F2C-60D9-82DD94D1FCAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FB966B67-2B56-5F2C-60D9-82DD94D1FCAC} = {AD2F308C-3B0C-982B-BE49-0AFBC3CA57AD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7BB22B0-7B8D-438A-8FE0-EF2375B82632}
+	EndGlobalSection
+EndGlobal
