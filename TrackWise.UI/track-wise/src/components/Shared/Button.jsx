@@ -1,21 +1,21 @@
-function Button ({
+function Button({
     children,
     label,
     onClick,
     type = "button",
-    disable = false,
+    disabled = false,
     className = ""
 }) {
     return (
         <button
-            type = {type}
-            onClick = {onClick}
-            disabled = {disable}
-            className = {className}
+            type={type}
+            onClick={onClick}
+            disabled={disabled}
+            className={className}
         >
-            {children ? children : label}
+            {children || label}
         </button>
     );
-}   
+}
 
 export default Button;
