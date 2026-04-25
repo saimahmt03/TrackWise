@@ -11,15 +11,14 @@ function App() {
                     Departments
                 </Link>
 
-                {/*<Link to="/employee">
+                <Link to="/employee" style={{ marginRight: "10px" }}>
                     Employees
-                </Link>*/}
+                </Link>
             </nav>
 
             <Routes>
-                {/*<Route path="/" element={<Navigate to="/department" />} */}
                 <Route path="/department" element={<DepartmentPage />} />
-                {/*<Route path="/employee" element={<EmployeePage />} />*/}
+                <Route path="/employee" element={<EmployeePage />} />
             </Routes>
 
         </BrowserRouter>

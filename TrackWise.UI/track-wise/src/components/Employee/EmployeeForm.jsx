@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FormInput from "../Shared/FormInput";
 import Button from "../Shared/Button";
-import SelectDropdown from "../Shared/SelectDropdown";
+import SelectDropdown from "../Shared/Dropdown";
 
 function EmployeeForm({
     createEmployee,

@@ -1,7 +1,8 @@
 let mockDepartments = [
     { id: 1, name: "HR" },
     { id: 2, name: "Finance" },
-    { id: 3, name: "IT" }
+    { id: 3, name: "IT" },
+    { id: 4, name: "Product" }
 ];
 
 // simulate API delay

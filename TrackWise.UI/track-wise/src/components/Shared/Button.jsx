@@ -1,9 +1,12 @@
+import { buttonStyles } from "./button.style";
+
 function Button({
     children,
     label,
     onClick,
     type = "button",
     disabled = false,
+    variant = "primary",
     className = ""
 }) {
     return (
@@ -11,7 +14,11 @@ function Button({
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={className}
+            className={`
+                ${buttonStyles.base}
+                ${buttonStyles[variant]}
+                ${className}
+            `}
         >
             {children || label}
         </button>
