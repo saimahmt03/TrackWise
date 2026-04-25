@@ -1,45 +1,30 @@
+import { modalStyles } from "./modal.style";
+
 function Modal({ isOpen, onClose, title, children }) {
 
     if (!isOpen) return null;
 
     return (
-        <div style={overlay}>
-            <div style={modalBox}>
+        <div className={modalStyles.overlay}>
+            <div className={modalStyles.container}>
 
-                <div style={header}>
-                    <h3>{title}</h3>
-                    <button onClick={onClose}>X</button>
+                <div className={modalStyles.header}>
+                    <h3 className={modalStyles.title}>{title}</h3>
+                    <button
+                        onClick={onClose}
+                        className={modalStyles.closeButton}
+                    >
+                        ×
+                    </button>
                 </div>
 
-                {children}
+                <div className={modalStyles.body}>
+                    {children}
+                </div>
 
             </div>
         </div>
     );
 }
-
-const overlay = {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    background: "rgba(0,0,0,0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-};
-
-const modalBox = {
-    background: "#fff",
-    padding: "20px",
-    borderRadius: "8px",
-    width: "400px"
-};
-
-const header = {
-    display: "flex",
-    justifyContent: "space-between"
-};
 
 export default Modal;

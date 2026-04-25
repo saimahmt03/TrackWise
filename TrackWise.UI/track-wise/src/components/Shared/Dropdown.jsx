@@ -1,14 +1,22 @@
+import { dropdownStyles } from "./dropdown.style";
+
 function Dropdown({
     label,
     name,
     value,
     onChange,
     options = [],
-    required = false
+    required = false,
+    disabled = false,
+    className = ""
 }) {
     return (
-        <div>
-            <label htmlFor={name}>{label}</label>
+        <div className={dropdownStyles.container}>
+            {label && (
+                <label htmlFor={name} className={dropdownStyles.label}>
+                    {label}
+                </label>
+            )}
 
             <select
                 id={name}
@@ -16,6 +24,11 @@ function Dropdown({
                 value={value}
                 onChange={onChange}
                 required={required}
+                disabled={disabled}
+                className={`
+                    ${dropdownStyles.select}
+                    ${className}
+                `}
             >
                 <option value="">-- Select --</option>
 
