@@ -1,51 +1,28 @@
-import { useState } from "react";
-import DepartmentForm from "./components/Department/DepartmentForm";
-import DepartmentTable from "./components/Department/DepartmentTable";
-import Modal from "./components/Shared/Modal";
-import Button from "./components/Shared/Button";
-import useDepartment from "./hooks/useDepartment";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import DepartmentPage from "./pages/DepartmentPage";
+import EmployeePage from "./pages/EmployeePage";
 
 function App() {
-
-    const departmentState = useDepartment();
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedDepartment, setSelectedDepartment] = useState(null);
-
-    const handleAdd = () => {
-        setSelectedDepartment(null);
-        setIsOpen(true);
-    };
-
-    const handleEdit = (dept) => {
-        setSelectedDepartment(dept);
-        setIsOpen(true);
-    };
-
     return (
-        <main>
-            <h1>TrackWise - Department Management</h1>
+        <BrowserRouter>
 
-            <Button label="Add Department" onClick={handleAdd} />
+            <nav style={{ marginBottom: "20px" }}>
+                <Link to="/department" style={{ marginRight: "10px" }}>
+                    Departments
+                </Link>
 
-            <DepartmentTable
-                {...departmentState}
-                onEdit={handleEdit}
-            />
+                {/*<Link to="/employee">
+                    Employees
+                </Link>*/}
+            </nav>
 
-            <Modal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                title={selectedDepartment ? "Edit Department" : "Add Department"}
-            >
-                <DepartmentForm
-                    {...departmentState}
-                    selectedDepartment={selectedDepartment}
-                    onSuccess={() => setIsOpen(false)}
-                />
-            </Modal>
+            <Routes>
+                {/*<Route path="/" element={<Navigate to="/department" />} */}
+                <Route path="/department" element={<DepartmentPage />} />
+                {/*<Route path="/employee" element={<EmployeePage />} />*/}
+            </Routes>
 
-        </main>
+        </BrowserRouter>
     );
 }
 
