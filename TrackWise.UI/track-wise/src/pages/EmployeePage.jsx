@@ -1,57 +1,68 @@
-import { useState } from 'react';
-import EmployeeForm from '../components/Employee/EmployeeForm';
-import EmployeeTable from '../components/Employee/EmployeeTable';
-import Modal from '../components/Shared/Modal';
-import Button from '../components/Shared/Button';
-import useEmployee from '../hooks/useEmployee';
+import { useState } from "react";
+import EmployeeForm from "../components/Employee/EmployeeForm";
+import EmployeeTable from "../components/Employee/EmployeeTable";
+import Modal from "../components/Shared/Modal";
+import Button from "../components/Shared/Button";
+import useEmployee from "../hooks/useEmployee";
+import { pageLayoutStyles } from "../pages/pageLayout.style";
 
 function EmployeePage() {
 
-    const employeeState = useEmployee(); // useEmployee hooks
+    const employeeState = useEmployee();
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-    const handleAdd = () => {   // Open modal for adding new employee
+    const handleAdd = () => {
         setSelectedEmployee(null);
         setIsOpen(true);
-    }
+    };
 
-    const handleEdit = (emp) => {   // Open modal for editing existing employee
+    const handleEdit = (emp) => {
         setSelectedEmployee(emp);
         setIsOpen(true);
-    }
+    };
 
-    const handleClose = () => {   // Close modal
+    const handleClose = () => {
         setIsOpen(false);
-     }
+    };
 
-     return (
-        <main>
-            <h1>Employee Management</h1>
+    return (
+        <main className={pageLayoutStyles.container}>
+            <div className={pageLayoutStyles.wrapper}>
 
-            <Button label="Add Employee" onClick={handleAdd} />
+                <h1 className={pageLayoutStyles.title}>
+                    Employee Management
+                </h1>
 
-            <EmployeeTable
-                {...employeeState}
-                onEdit={handleEdit}
-            />
+                <div className={pageLayoutStyles.actions}>
+                    <Button label="Add Employee" onClick={handleAdd} />
+                </div>
 
-            <Modal
-                isOpen={isOpen}
-                onClose={handleClose}
-                title={selectedEmployee ? "Edit Employee" : "Add Employee"}
-            >
+                <div className={pageLayoutStyles.tableSection}>
+                    <EmployeeTable
+                        {...employeeState}
+                        onEdit={handleEdit}
+                    />
+                </div>
 
-                <EmployeeForm
-                    {...employeeState}
-                    selectedEmployee={selectedEmployee}
-                    onSuccess={handleClose}
-                />
-                
-            </Modal>
+                <Modal
+                    isOpen={isOpen}
+                    onClose={handleClose}
+                    title={selectedEmployee ? "Edit Employee" : "Add Employee"}
+                >
+                    <div className={pageLayoutStyles.modalContent}>
+                        <EmployeeForm
+                            {...employeeState}
+                            selectedEmployee={selectedEmployee}
+                            onSuccess={handleClose}
+                        />
+                    </div>
+                </Modal>
+
+            </div>
         </main>
-     );
+    );
 }
 
 export default EmployeePage;

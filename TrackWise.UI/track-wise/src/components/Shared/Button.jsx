@@ -7,6 +7,8 @@ function Button({
     type = "button",
     disabled = false,
     variant = "primary",
+    fullWidth = false,
+    withSpacing = false,
     className = ""
 }) {
     return (
@@ -17,6 +19,8 @@ function Button({
             className={`
                 ${buttonStyles.base}
                 ${buttonStyles[variant]}
+                ${fullWidth ? buttonStyles.block : ""}
+                ${withSpacing ? buttonStyles.spacingTop : ""}
                 ${className}
             `}
         >

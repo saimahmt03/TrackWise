@@ -1,42 +1,35 @@
 export const modalStyles = {
     overlay: `
-        fixed
-        inset-0
-        bg-black/50
-        flex
-        items-center
-        justify-center
-        z-50
+        fixed inset-0 z-50
+        flex items-center justify-center
+        bg-black/50 backdrop-blur-sm
+        p-4
     `,
     container: `
         bg-white
-        rounded-lg
-        shadow-lg
-        w-full
-        max-w-md
-        p-5
+        w-full max-w-lg
+        rounded-xl
+        shadow-2xl
+        border border-gray-200
+        overflow-hidden
         animate-fadeIn
     `,
     header: `
-        flex
-        justify-between
-        items-center
-        mb-4
+        flex items-center justify-between
+        px-6 py-4
+        border-b border-gray-200
     `,
     title: `
-        text-lg
-        font-semibold
-        text-gray-800
+        text-lg font-semibold text-gray-800
     `,
     closeButton: `
-        text-gray-500
-        hover:text-gray-700
-        text-xl
-        font-bold
-        cursor-pointer
+        text-gray-400 hover:text-gray-700
+        text-xl font-bold
+        transition
     `,
     body: `
-        text-sm
-        text-gray-600
+        px-6 py-5
+        text-sm text-gray-600
+        leading-relaxed
     `
 };

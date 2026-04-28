@@ -4,6 +4,7 @@ import DepartmentTable from "../components/Department/DepartmentTable";
 import Modal from "../components/Shared/Modal";
 import Button from "../components/Shared/Button";
 import useDepartment from "../hooks/useDepartment";
+import { pageLayoutStyles } from "../pages/pageLayout.style";
 
 function DepartmentPage() {
 
@@ -27,27 +28,39 @@ function DepartmentPage() {
     };
 
     return (
-        <main>
-            <h1>Department Management</h1>
+        <main className={pageLayoutStyles.container}>
+            <div className={pageLayoutStyles.wrapper}>
 
-            <Button label="Add Department" onClick={handleAdd} />
+                <h1 className={pageLayoutStyles.title}>
+                    Department Management
+                </h1>
 
-            <DepartmentTable
-                {...departmentState}
-                onEdit={handleEdit}
-            />
+                <div className={pageLayoutStyles.actions}>
+                    <Button label="Add Department" onClick={handleAdd} />
+                </div>
 
-            <Modal
-                isOpen={isOpen}
-                onClose={handleClose}
-                title={selectedDepartment ? "Edit Department" : "Add Department"}
-            >
-                <DepartmentForm
-                    {...departmentState}
-                    selectedDepartment={selectedDepartment}
-                    onSuccess={handleClose}
-                />
-            </Modal>
+                <div className={pageLayoutStyles.tableSection}>
+                    <DepartmentTable
+                        {...departmentState}
+                        onEdit={handleEdit}
+                    />
+                </div>
+
+                <Modal
+                    isOpen={isOpen}
+                    onClose={handleClose}
+                    title={selectedDepartment ? "Edit Department" : "Add Department"}
+                >
+                    <div className={pageLayoutStyles.modalContent}>
+                        <DepartmentForm
+                            {...departmentState}
+                            selectedDepartment={selectedDepartment}
+                            onSuccess={handleClose}
+                        />
+                    </div>
+                </Modal>
+
+            </div>
         </main>
     );
 }

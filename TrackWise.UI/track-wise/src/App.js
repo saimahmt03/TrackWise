@@ -1,22 +1,18 @@
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DepartmentPage from "./pages/DepartmentPage";
 import EmployeePage from "./pages/EmployeePage";
+import Navbar from "./components/Shared/Navbar";
 
 function App() {
     return (
         <BrowserRouter>
 
-            <nav style={{ marginBottom: "20px" }}>
-                <Link to="/department" style={{ marginRight: "10px" }}>
-                    Departments
-                </Link>
-
-                <Link to="/employee" style={{ marginRight: "10px" }}>
-                    Employees
-                </Link>
-            </nav>
+            <Navbar />
 
             <Routes>
+                {/* Default route */}
+                <Route path="/" element={<Navigate to="/department" />} />
+
                 <Route path="/department" element={<DepartmentPage />} />
                 <Route path="/employee" element={<EmployeePage />} />
             </Routes>
