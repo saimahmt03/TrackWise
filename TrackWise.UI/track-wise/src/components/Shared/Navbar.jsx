@@ -3,6 +3,7 @@ import { navbarStyles } from "./navbar.style";
 
 function Navbar() {
     return (
+        
         <nav className={navbarStyles.nav}>
             <div className={navbarStyles.container}>
 
@@ -24,10 +25,16 @@ function Navbar() {
                         <span className={navbarStyles.linkUnderline}></span>
                     </Link>
 
+                    <Link to="/task" className={navbarStyles.link}>
+                        Tasks
+                        <span className={navbarStyles.linkUnderline}></span>
+                    </Link>
+
                 </div>
 
             </div>
         </nav>
+        
     );
 }
 
