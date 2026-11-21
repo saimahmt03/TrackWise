@@ -1,35 +1,79 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "../Shared/FormInput";
 import Button from "../Shared/Button";
 
-function DepartmentForm() {
+function DepartmentForm({
+    createDepartment,
+    updateDepartment,
+    selectedDepartment,
+    error,
+    loading,
+    onSuccess
+}) {
+
     const [departmentData, setDepartmentData] = useState({
         name: ""
     });
 
-    const handleSubmit = (e) => {
+    // PREFILL FOR EDIT
+    useEffect(() => {
+        if (selectedDepartment) {
+            setDepartmentData({
+                name: selectedDepartment.name || ""
+            });
+        }
+    }, [selectedDepartment]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(departmentData);
+
+        let success = false;
+
+        if (selectedDepartment) {
+            success = await updateDepartment(selectedDepartment.id, departmentData);
+        } else {
+            success = await createDepartment(departmentData);
+        }
+
+        if (success) {
+            setDepartmentData({ name: "" });
+            if (onSuccess) onSuccess();
+        }
     };
 
     return (
-        <form onSubmit = {handleSubmit}> 
+        <form onSubmit={handleSubmit}>
 
-            {/* Reusability of FormInput component for Department Form */}
             <FormInput
                 label="Department Name"
                 name="name"
                 value={departmentData.name}
-                onChange={(e) => setDepartmentData(e.target.value)}
+                onChange={(e) =>
+                    setDepartmentData({
+                        ...departmentData,
+                        name: e.target.value
+                    })
+                }
                 placeholder="Enter department name"
                 required
-            /> 
+            />
 
-            {/* Reusability of Button component for Department Form */}
-            <Button type="submit" label="Save Department" /> 
+            {error && <p style={{ color: "red" }}>{error}</p>}
+
+            <Button
+                type="submit"
+                label={
+                    loading
+                        ? "Saving..."
+                        : selectedDepartment
+                            ? "Update Department"
+                            : "Save Department"
+                }
+                disabled={loading}
+            />
 
         </form>
     );
-} 
+}
 
 export default DepartmentForm;

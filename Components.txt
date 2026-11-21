@@ -134,8 +134,7 @@ Repository (Data Access / ADO.NET)
 Data Layer (CreateConnection)
    ↓
 Database (SQL Server)
-
-
+------------------------------------------------------------------
 EXAMPLE: “Create Employee”
 
 Controller receives request
@@ -155,7 +154,68 @@ Data saved in SQL Server
 Result returned back to Controller
    ↓
 Controller returns API response to React
+-----------------------------------------------------------------
+User clicks "Add Department"
+        ↓
+Modal opens
+        ↓
+User submits form
+        ↓
+Hook → API → success
+        ↓
+Form resets + Modal closes
+        ↓
+Table updates automatically
+--------------------------------------------------------------
+Modal (App)
+   ↓
+DepartmentForm (UI)
+   ↓
+useDepartment (logic)
+   ↓
+departmentService (API)
+   ↓
+apiClient (HTTP)
+-------------------------------------------------------------
+Click "Add"
+   → Modal opens (empty form)
 
+Click "Edit"
+   → Modal opens (prefilled form)
+
+Submit
+   → Hook (create/update)
+   → Service → API
+   → State updated
+   → Table refresh
+   → Modal closes
+------------------------------------------------------------
+App (state owner)
+   ↓
+Modal (UI container)
+   ↓
+DepartmentForm (create/update logic)
+   ↓
+useDepartment (business logic)
+   ↓
+departmentService (API layer)
+   ↓
+apiClient (HTTP + auth)
+   ↓
+Backend (.NET API)
+
+---------------------------------------------------------
+
+Testing
+
+services/
+├── departmentService.js        ← REAL API
+├── departmentService.mock.js   ← MOCK
+├── index.js                   ← SWITCH LOGIC (we create this)
+
+
+MOCK (frontend only)
+REAL API (backend)
 
 
 
